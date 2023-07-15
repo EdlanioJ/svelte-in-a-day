@@ -16,6 +16,7 @@ export const actions = {
       })
     }
 
+    console.log(data.url)
     throw redirect(303, data.url)
   },
 
