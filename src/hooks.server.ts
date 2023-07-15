@@ -1,10 +1,11 @@
-import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
+import { VITE_VERCEL_SUPABASE_ANON_KEY, VITE_VERCEL_SUPABASE_URL } from '$lib/env'
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
+import type { Handle } from '@sveltejs/kit'
 
-export const handle = async ({ event, resolve }) => {
+export const handle = (async ({ event, resolve }) => {
   event.locals.supabase = createSupabaseServerClient({
-    supabaseUrl: PUBLIC_SUPABASE_URL,
-    supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
+    supabaseUrl: VITE_VERCEL_SUPABASE_URL,
+    supabaseKey: VITE_VERCEL_SUPABASE_ANON_KEY,
     event,
   })
 
@@ -20,4 +21,4 @@ export const handle = async ({ event, resolve }) => {
       return name === 'content-range'
     },
   })
-}
+}) satisfies Handle
